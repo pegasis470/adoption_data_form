@@ -18,7 +18,19 @@ except FileNotFoundError :
 
 window=Tk()
 window.title('ADOPTION FORM')
-#lable1=
+label1=Label(window,text='Description of the Animal',font=25)
+label2=Label(window,text='Kind of Animal')
+entry1=Entry(window)
+label3=Label(window,text='Sex')
+label4=Label(window,text='Age')
+label5=Label(window,text='color')
+label6=Label(window,text='Breed')
+lable7=Label(window,text='Physically fit')
+label1.grid(row=0,column=0)
+label2.grid(row=1,column=0)
+entry1.grid(row=1,column=1)	
+label3.grid(row=2,column=0)
+label4.grid(row=2,column=2)
 # 
 Terms_window=Toplevel()
 Terms_window.title('Terms and Conditions and Consent form')
