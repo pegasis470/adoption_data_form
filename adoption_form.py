@@ -20,8 +20,14 @@ window=Tk()
 window.title('ADOPTION FORM')
 
 def Save():
-    row=[date,dt.now().strftime('%I:%M'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),menu1.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get()]
-    print(row)
+    row=[date,dt.now().strftime('%I:%M'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),menu1.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get(),menu6.get()]
+    file=open(path,'a')
+    Writer=writer(file)
+    Writer.writerow(row)
+    file.close()
+    entry1.delete(0,END),entry2.delete(0,END),entry3.delete(0,END),entry4.delete(0,END),entry5.delete(0,END),menu1.set('please choose one'),entry6.delete(0,END),entry7.delete(0,END),entry8.delete(0,END),entry9.delete(0,END),entry10.delete(0,END),entry11.delete(0,END),entry12.delete(0,END),entry13.delete(0,END),entry14.delete(0,END),entry15.delete(0,END),entry16.delete(0,END),entry17.delete(0,END),entry18.delete(0,END),entry19.delete(0,END),entry20.delete(0,END),entry21.delete(0,END),menu2.set('please choose one '),menu3.set('please choose one '),menu4.set('please choose one '),menu5.set('please choose one '),menu6.set('please choose one')
+    check.deselect()
+    messagebox.showinfo("sucess",'data saved sucessfully')
 
 
 
@@ -91,11 +97,14 @@ label26=Label(window,text='My dog/cat needs to be able to be alone (per day)')
 menu4=StringVar()
 menu4.set('choose one')
 drop4=OptionMenu(window,menu4,*['2 hours or less','4 hours or less','4-8 hours','8-10 hours','12 hours'])
-label27=Label(window,text='Do you want a guard dog')
+label27=Label(window,text='When you\'re not at home, your dog/cat will spend his/her time')
 menu5=StringVar()
 menu5.set('choose one')
-drop5=OptionMenu(window,menu5,*['yes','no'])
-
+drop5=OptionMenu(window,menu5,*['With the relatives','In a crate in the house','In the yard','Loose in the house','Confined to one room in the house'])
+label28=Label(window,text='Do you want a guard dog')
+menu6=StringVar()
+menu6.set('choose one')
+drop6=OptionMenu(window,menu6,*['yes','no'])
 
 label1.grid(row=0,column=1)
 label2.grid(row=1,column=0)
@@ -148,8 +157,10 @@ label25.grid(row=23,column=0)
 drop3.grid(row=23,column=1)
 label26.grid(row=24,column=0)
 drop4.grid(row=24,column=1)
-label25.grid(row=25,column=0)
-drop5.grid(row=25,column=1)
+label27.grid(row=24,column=0)
+drop5.grid(row=24,column=1)
+label28.grid(row=25,column=0)
+drop6.grid(row=25,column=1)
 
 
 Terms_window=Toplevel()
