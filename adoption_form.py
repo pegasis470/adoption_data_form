@@ -2,7 +2,6 @@ from csv import *
 from tkinter import *
 from tkinter import messagebox
 from datetime import datetime as dt
-import pandas as pd
 import datetime
 import os
 date=datetime.date.today()
