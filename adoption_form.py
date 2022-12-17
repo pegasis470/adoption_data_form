@@ -9,12 +9,15 @@ date=datetime.date.today()
 filename=str(date)+'.csv'
 path=os.path.join(os.getcwd(),'data',filename)
 try:
-        file=pd.read_csv(path)
+        file=open(path)
 except FileNotFoundError :
-        open_file=open(path,'a')
-        Writer=writer(open_file)
-        Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed',"Physically Fit",'Health Acknowledgement','Ongoing Treatment','Veterinarian name','Caretaker/Foster name','Contact no','Contact no. 2','Email','Local Residence','Permanent residence','Adopter\'s name','Contact no','Contact no.2','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','needs to be alone for','when not home','want a gaurd dog'])
-        open_file.close()
+        try:
+                open_file=open(path,'w')
+                Writer=writer(open_file)
+                Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed',"Physically Fit",'Health Acknowledgement','Ongoing Treatment','Veterinarian name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','needs to be alone for','when not home','want a gaurd dog'])
+                open_file.close()
+        except FileNotFoundError:
+                os.mkdir(os.path.join(os.getcwd(),'data'))
 
 window=Tk()
 window.title('ADOPTION FORM')
