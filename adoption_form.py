@@ -23,7 +23,11 @@ window.title('ADOPTION FORM')
 
 def Save():
     row=[date,dt.now().strftime('%I:%M'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),menu1.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get(),menu6.get()]
-    file=open(path,'a')
+    try:
+            file=open(path,'a')
+    except PermissionError:
+            messagebox.showerror('ERROR',"The data base file is locked as it may be in use by another application please close that instance and try agian ")
+            return None
     Writer=writer(file)
     Writer.writerow(row)
     file.close()
