@@ -7,22 +7,29 @@ import os
 date=datetime.date.today()
 filename=str(date)+'.csv'
 path=os.path.join(os.getcwd(),'data',filename)
-try:
-        file=open(path)
-except FileNotFoundError :
-        try:
-                open_file=open(path,'w')
-                Writer=writer(open_file)
-                Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed',"Physically Fit",'Health Acknowledgement','Ongoing Treatment','Veterinarian name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','needs to be alone for','when not home','want a gaurd dog'])
-                open_file.close()
-        except FileNotFoundError:
-                os.mkdir(os.path.join(os.getcwd(),'data'))
 
+def Test_file():
+	try:
+		file=open(path)
+		file.close()
+	except FileNotFoundError :
+		try:
+		        open_file=open(path,'w')
+		        Writer=writer(open_file)
+		        Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed',"Physically Fit",'Health Acknowledgement','Ongoing Treatment','Veterinarian name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','needs to be alone for','when not home','want a gaurd dog'])
+		        open_file.close()
+		except FileNotFoundError:
+		        os.mkdir(os.path.join(os.getcwd(),'data'))
+		        Test_file()
+		      
+Test_file()
 window=Tk()
+icon=PhotoImage(file=os.path.join(os.getcwd(),'icon.png'))
+window.iconphoto(False,icon)
 window.title('ADOPTION FORM')
 
 def Save():
-    row=[date,dt.now().strftime('%I:%M'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),menu1.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get(),menu6.get()]
+    row=[date,dt.now().strftime('%I:%M %p'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),menu1.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get(),menu6.get()]
     try:
             file=open(path,'a')
     except PermissionError:
@@ -66,7 +73,7 @@ label10=Label(window,text='Caretaker/Foster’s name')
 entry8=Entry(window)
 label11=Label(window,text='Contact no.')
 entry9=Entry(window)
-label12=Label(window,text='Contact no. 2')
+label12=Label(window,text='Whatsapp number')
 entry10=Entry(window)
 label13=Label(window,text='Email')
 entry11=Entry(window)
@@ -79,7 +86,7 @@ label16=Label(window,text='Adopter\'s name')
 entry14=Entry(window)
 label17=Label(window,text='Contact no')
 entry15=Entry(window)
-label18=Label(window,text='Contact no 2')
+label18=Label(window,text='whatsapp number')
 entry16=Entry(window)
 label19=Label(window,text='Line of work')
 entry17=Entry(window)
@@ -170,6 +177,7 @@ drop6.grid(row=25,column=1)
 
 
 Terms_window=Toplevel()
+Terms_window.iconphoto(False,icon)
 Terms_window.title('Terms and Conditions and Consent form')
 Label(Terms_window,text='Terms and Conditions',font=('Arial',25)).pack()
 Label(Terms_window,text='1) I shall not hold the organizers of the adoption camp responsible if the animal shows sign of illness or dies after adoption.',font=22).pack()
