@@ -4,6 +4,7 @@ from tkinter import messagebox
 from datetime import datetime as dt
 import datetime
 import os
+import shutil as sh
 date=datetime.date.today()
 filename=str(date)+'.csv'
 path=os.path.join(os.getcwd(),'data',filename)
@@ -16,7 +17,7 @@ def Test_file():
         try:
             open_file=open(path,'w')
             Writer=writer(open_file)
-            Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed','Health Acknowledgement','Veterinarian name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
+            Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed','Health Acknowledgement','counselor name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
             open_file.close()
         except FileNotFoundError:
             os.mkdir(os.path.join(os.getcwd(),'data'))
@@ -31,10 +32,10 @@ def Save():
             return None
     Writer=writer(file)
     Writer.writerow(data)
-    file.close()				
-    print_path=os.path.join(os.getcwd(),'Prints',f"{entry14.get()}.txt")
+    file.close()
+    print_path=os.path.join(os.getcwd(),'Prints',f"{entry14.get()}.docx")
     try:
-        print_file=open(print_path,'w')
+        print_file=open(print_path,'a')
     except FileNotFoundError:
     	os.mkdir(os.path.join(os.getcwd(),"Prints"))
     print_file=open(print_path,'w')
@@ -49,12 +50,14 @@ def Save():
 
 Test_file()
 window=Tk()
-icon=PhotoImage(file=os.path.join(os.getcwd(),'icon.png'))
-window.iconphoto(False,icon)
+#icon=PhotoImage(file=os.path.join(os.getcwd(),'icon.png'))
+#window.iconphoto(False,icon)
 window.title('ADOPTION FORM')
 
 
 
+label9=Label(window,text='Counselor Name',font=("Arial",15,"bold"))
+entry7=Entry(window)
 label1=Label(window,text='Description of the Animal',font=("Arial",25,"bold"))
 label2=Label(window,text='Kind of Animal',font=("Arial",15,"bold"))
 entry1=Entry(window)
@@ -68,8 +71,6 @@ label6=Label(window,text='Breed',font=("Arial",15,"bold"))
 entry5=Entry(window)
 label7=Label(window,text='Health acknowledgement',font=("Arial",15,"bold"))
 entry6=Entry(window,width=20)
-label9=Label(window,text='Veterinarian name',font=("Arial",15,"bold"))
-entry7=Entry(window)
 Label(window,text='Specifics of the Caretaker/Foster',font=("Arial",25,"bold")).grid(row=7,column=1)
 label10=Label(window,text='Caretaker/Foster’s name',font=("Arial",15,"bold"))
 entry8=Entry(window)
@@ -122,23 +123,23 @@ drop5=OptionMenu(window,menu5,*['With the relatives','In a crate in the house','
 #menu6.set('choose one')
 #drop6=OptionMenu(window,menu6,*['yes','no'])
 
-label1.grid(sticky="W",row=0,column=1,columnspan=2)
-label2.grid(sticky="e",row=1,column=0)
-entry1.grid(sticky="W",row=1,column=1)	
-label3.grid(sticky="e",row=2,column=0)
-entry2.grid(sticky="W",row=2,column=1)
-label4.grid(sticky="e",row=2,column=2)
-entry3.grid(sticky="W",row=2,column=3)
-label5.grid(sticky="e",row=3,column=0)
-entry4.grid(sticky="W",row=3,column=1)
-label6.grid(sticky="e",row=3,column=2)
-entry5.grid(sticky="W",row=3,column=3)
-label7.grid(sticky="e",row=4,column=0)
+label1.grid(sticky="W",row=0+1,column=1,columnspan=2)
+label2.grid(sticky="e",row=1+1,column=0)
+entry1.grid(sticky="W",row=1+1,column=1)	
+label3.grid(sticky="e",row=2+1,column=0)
+entry2.grid(sticky="W",row=2+1,column=1)
+label4.grid(sticky="e",row=2+1,column=2)
+entry3.grid(sticky="W",row=2+1,column=3)
+label5.grid(sticky="e",row=3+1,column=0)
+entry4.grid(sticky="W",row=3+1,column=1)
+label6.grid(sticky="e",row=3+1,column=2)
+entry5.grid(sticky="W",row=3+1,column=3)
+label7.grid(sticky="e",row=4+1,column=0)
 #drop1.grid(sticky="W",row=4,column=1)
 #label8.grid(sticky="W",row=5,column=0)
-entry6.grid(sticky="W",row=4,column=1)
-label9.grid(sticky="e",row=6,column=0)
-entry7.grid(sticky="W",row=6,column=1)
+entry6.grid(sticky="W",row=4+1,column=1)
+label9.grid(sticky="e",row=0,column=0)
+entry7.grid(sticky="W",row=0,column=1)
 label10.grid(sticky="e",row=8,column=0)
 entry8.grid(sticky="W",row=8,column=1)
 label11.grid(sticky="e",row=9,column=0)
@@ -180,7 +181,7 @@ drop5.grid(sticky="W",row=26,column=1)
 
 
 Terms_window=Toplevel()
-Terms_window.iconphoto(False,icon)
+#Terms_window.iconphoto(False,icon)
 Terms_window.title('Terms and Conditions and Consent form')
 Label(Terms_window,text='Terms and Conditions',font=('Arial',25,"bold")).pack()
 #Label(Terms_window,text='1) I shall not hold the organizers of the adoption camp responsible if the animal shows sign of illness or dies after adoption.',font=("Arial",15,"bold")).pack()
