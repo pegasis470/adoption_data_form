@@ -1,14 +1,14 @@
 from csv import *
 from tkinter import *
+import tkinter as Top
 from tkinter import messagebox
 from datetime import datetime as dt
 import datetime
 import os
-import shutil as sh
 date=datetime.date.today()
 filename=str(date)+'.csv'
 path=os.path.join(os.getcwd(),'data',filename)
-columns=['Date','Time','Kind of Animal','Sex','Age','Fur Color','Breed','Health Acknowledgement','Veterinarian name','Caretaker/Foster name','Caretaker Contact no','Caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','Adoptor Contact no','Adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','What are your plans for taking care of your','Have you had a pet before','Your pet will primarly be an','My dog/cat needs to be able to be alone (per day)','When not home']
+columns=['counselor name','Date','Time','Kind of Animal','Sex','Age','Fur Color','Breed','Health Acknowledgement','Caretaker/Foster name','Caretaker Contact no','Caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','Adoptor Contact no','Adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','What are your plans for taking care of your','Have you had a pet before','Your pet will primarly be an','My dog/cat needs to be able to be alone (per day)','When not home']
 def Test_file():
     try:
         file=open(path)
@@ -17,14 +17,14 @@ def Test_file():
         try:
             open_file=open(path,'w')
             Writer=writer(open_file)
-            Writer.writerow(['Date','Time','Kind of Animal','Sex','Age','Color','Breed','Health Acknowledgement','counselor name','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
+            Writer.writerow(['counselor name','Date','Time','Kind of Animal','Sex','Age','Color','Breed','Health Acknowledgement','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
             open_file.close()
         except FileNotFoundError:
             os.mkdir(os.path.join(os.getcwd(),'data'))
             Test_file()
 		      
 def Save():
-    data=[date,dt.now().strftime('%I:%M %p'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),entry6.get(),entry7.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get()]
+    data=[entry7.get(),date,dt.now().strftime('%I:%M %p'),entry1.get(),entry2.get(),entry3.get(),entry4.get(),entry5.get(),entry6.get(),entry8.get(),entry9.get(),entry10.get(),entry11.get(),entry12.get(),entry13.get(),entry14.get(),entry15.get(),entry16.get(),entry17.get(),entry18.get(),entry19.get(),entry20.get(),entry21.get(),menu2.get(),menu3.get(),menu4.get(),menu5.get()]
     try:
             file=open(path,'a')
     except PermissionError:
@@ -40,13 +40,53 @@ def Save():
     	os.mkdir(os.path.join(os.getcwd(),"Prints"))
     print_file=open(print_path,'w')
     for i in range(len(data)):
-        print_file.write(f"{columns[i]}:    {data[i]}\n\n")
-    print_file.write(f"I ({entry14.get()}) has understood and agreee to the tearms and conditions displayed to me in the for and here by provide my concent by signing below\n\n")
-    print_file.write("____________________________________________________________________________________________________________")
+        if i == 2:
+            print_file.write("\n Description of the Animal \n")
+        elif i == 9:
+            print_file.write("\n Specifics of the Caretaker/Foster \n")
+        elif i== 15:
+            print_file.write("\n Specifics of the Adopter \n")
+        print_file.write(f"{columns[i]}:    {data[i]}\n")
+    print_file.write(f"\n\n\nI ({entry14.get()}) has understood and agreee to the tearms and conditions displayed to me on the screen and here by provide my concent by signing below\n\n")
+    print_file.write("______________________________________________________________________________________")
     print_file.close()
     entry1.delete(0,END),entry2.delete(0,END),entry3.delete(0,END),entry4.delete(0,END),entry5.delete(0,END),entry6.delete(0,END),entry7.delete(0,END),entry8.delete(0,END),entry9.delete(0,END),entry10.delete(0,END),entry11.delete(0,END),entry12.delete(0,END),entry13.delete(0,END),entry14.delete(0,END),entry15.delete(0,END),entry16.delete(0,END),entry17.delete(0,END),entry18.delete(0,END),entry19.delete(0,END),entry20.delete(0,END),entry21.delete(0,END),menu2.set('please choose one '),menu3.set('please choose one '),menu4.set('please choose one '),menu5.set('please choose one ')
     check.deselect()
     messagebox.showinfo("sucess",'data saved sucessfully')
+
+def translate():
+    new=Toplevel()
+    new.iconphoto(False,icon)
+    new.title("नियम शर्तें और सहमति प्रपत्र")
+    Label(new,text="एडॉप्टर द्वारा सहमति",font=("Arial",20,"bold")).pack()
+    Label(new,text="1) मैं पिल्ला/बिल्ली के बच्चे को अपने जोखिम और अपनी जिम्मेदारी पर गोद ले रहा हूं। मैंने परिवार के अन्य सदस्यों से परामर्श किया है और वे पिल्ला/बिल्ली के बच्चे को गोद लेने के लिए सहमत हो गए हैं।",font=("Arial",10,"bold")).pack()
+    Label(new,text='मैं यह सुनिश्चित करूंगा कि गोद लिए गए पालतू जानवर को गोद लेने के बाद पशु चिकित्सक द्वारा पूरी तरह से जांच की जाए।',font=("Arial",10,"bold")).pack()
+    Label(new,text='2) मैं यह सुनिश्चित करूंगा कि मेरे द्वारा गोद लिए गए पशु को स्वच्छ, हवादार परिसर में रखा जाए, ठीक से खिलाया जाए और नियमित व्यायाम किया जाए।',font=("Arial",10,"bold")).pack()
+    Label(new,text='3) यदि मेरे द्वारा गोद लिया गया जानवर बीमार हो जाता है, तो मैं पशु चिकित्सक से परामर्श लूंगा। मैं यह भी सुनिश्चित करूंगा कि पशु चिकित्सक द्वारा बताए गए कृमिनाशक और टीकाकरण कार्यक्रम का पालन किया जाए।',font=("Arial",10,"bold")).pack()
+    Label(new,text='4) मुझे इस बात की पूरी जानकारी है कि प्रारंभिक जांच के दौरान कुछ बीमारियों जैसे गैस्ट्रो-एंटराइटिस, रेबीज, डिस्टेंपर, सांस की बीमारियों आदि का निदान पशु चिकित्सक द्वारा नहीं किया जा सकता है।',font=("Arial",10,"bold")).pack()
+    Label(new,text='जिस जानवर को मैंने गोद लिया है, अगर गोद लेने के कुछ दिनों के बाद उसमें किसी बीमारी के लक्षण दिखाई देते हैं, तो मैं पशु चिकित्सक से पालतू जानवर का इलाज करवाऊंगा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='नियम और शर्तें',font=("Arial",20,"bold")).pack()
+    Label(new,text='1) मैं पालतू जानवर को हर समय कठोर परिस्थितियों में बंधा या बाहर नहीं रखूंगा या लंबे समय तक अकेला नहीं रखूंगा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='2) चाहे मैं नर या मादा पिल्ले/बिल्ली के बच्चे को गोद लूं, पालतू जानवरों के अच्छे स्वास्थ्य को सुनिश्चित करने के लिए मैं इसे न्यूट्रेड/स्पाय करवाऊंगा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='3) यदि कुत्ते के स्वामित्व को बदलने की आवश्यकता है, तो मैं केयरटेकर/पालक और टीम A.w.h को सूचित करूंगा और प्रक्रियाओं का पालन किया जाएगा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='4) मुझे पता है कि गोद लिए कुत्ते को छोड़ने पर पशु क्रूरता निवारण अधिनियम, 1960 के तहत जुर्माना लगेगा। टीम एनिमल्स विथ ह्यूमैनिटी ऐसा करने पर दत्तक कुत्ते के खिलाफ कानूनी कार्रवाई की मांग कर सकती है।',font=("Arial",10,"bold")).pack()
+    Label(new,text='5) मैं अपनी इच्छा से गोद लिए गए पालतू पशु का नियमानुसार नगर निगम में पंजीकरण कराऊंगा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='6) मुझे पता है कि उचित परामर्श और परामर्श के साथ पालतू जानवर को गोद लेने की लागत शून्य रुपये (रु. 0/-) है।',font=("Arial",10,"bold")).pack()
+    Label(new,text='7) मैं मानता हूं कि गोद लिए गए पालतू जानवर की जीवन भर की अवधि में, टीम एनिमल्स विद ह्यूमैनिटी और केयरटेकर/पालक को यह निरीक्षण करने का अधिकार है कि मैं जानवर को घर पर कैसे ',font=("Arial",10,"bold")).pack()
+    Label(new,text='रख रहा हूं, साथ ही मैं अपने पालतू जानवर को अन्य जगहों पर डिजिटल रूप से ले जा रहा हूं। या बिना किसी पूर्व सूचना के भौतिक मुलाकातों द्वारा।',font=("Arial",10,"bold")).pack()
+    Label(new,text='मैं टीम एनिमल्स विद ह्यूमैनिटी को गोद लिए गए पालतू जानवरों के बारे में नियमित अपडेट दूंगा। यदि क्रूरता निवारण अधिनियम, 1960 के तहत कोई उल्लंघन होता है, तो मुझे पता है कि टीम एनिमल्स विथ ह्यूमैनिटी जानवर को जब्त कर',font=("Arial",10,"bold")).pack()
+    Label(new,text='सकती है या कानून के अनुसार कार्रवाई कर सकती है।',font=("Arial",10,"bold")).pack()
+    Label(new,text='यदि पिल्ला/बिल्ली का बच्चा/पालतू पशु मालिक की लापरवाही के कारण लावारिस, अस्वस्थ, बुरी स्थिति में या मृत पाया जाता है, तो टीम एनिमल्स ',font=("Arial",10,"bold")).pack()
+    Label(new,text='विथ ह्यूमैनिटी रुपये का जुर्माना ले सकती है। 10,000/- और दत्तक ग्रहण करने वाले पर कानूनी कार्रवाई के लिए आगे बढ़ें।',font=("Arial",10,"bold")).pack()
+    Label(new,text="शर्तों पर हस्ताक्षर करने के बाद, यदि मैं (दत्तक) अपनाए गए पालतू जानवर को लौटाता हूं, तो मैं (दत्तक)  5000/- रुपये तक की राशि का भुगतान करने के लिए उत्तरदायी होगा लौटाने पर।",font=("Arial",10,"bold")).pack()
+    Label(new,text=" मैं (दत्तक) गोद लिए गए पालतू जानवर को केवल टीम AWH को मानवता के साथ लौटाऊंगा और इसे नहीं छोड़ूंगा।",font=("Arial",10,"bold")).pack()
+    Button(new,text="ठीक",command=new.destroy).pack()
+    
+    
+    
+    
+
+
 
 Test_file()
 window=Tk()
@@ -104,19 +144,19 @@ label23=Label(window,text='pet in case you go out for some days?',font=("Arial",
 entry21=Entry(window)
 label24=Label(window,text='Have you pet a pet before',font=("Arial",10,"bold"))
 menu2=StringVar()
-menu2.set('choose one')
+menu2.set('please choose one')
 drop2 = OptionMenu(window,menu2,*['currently own','yes','no'] )
 label25=Label(window,text='Your dog will primarily be an',font=("Arial",10,"bold"))
 menu3=StringVar()
-menu3.set('choose one')
+menu3.set('please choose one')
 drop3=OptionMenu(window,menu3,*['inside pet','gaurd pet'])
 label26=Label(window,text='My dog/cat needs to be able to be alone (per day)',font=("Arial",10,"bold"))
 menu4=StringVar()
-menu4.set('choose one')
+menu4.set('please choose one')
 drop4=OptionMenu(window,menu4,*['2 hours or less','4 hours or less','4-8 hours','8-10 hours','12 hours'])
 label27=Label(window,text='When you\'re not at home, your dog/cat will spend his/her time',font=("Arial",10,"bold"))
 menu5=StringVar()
-menu5.set('choose one')
+menu5.set('please choose one')
 drop5=OptionMenu(window,menu5,*['With the relatives','In a crate in the house','In the yard','Loose in the house','Confined to one room in the house'])
 #label28=Label(window,text='Do you want a guard dog')
 #menu6=StringVar()
@@ -183,31 +223,32 @@ drop5.grid(sticky="W",row=26,column=1)
 Terms_window=Toplevel()
 Terms_window.iconphoto(False,icon)
 Terms_window.title('Terms and Conditions and Consent form')
-Label(Terms_window,text='Terms and Conditions',font=('Arial',25,"bold")).pack()
-#Label(Terms_window,text='1) I shall not hold the organizers of the adoption camp responsible if the animal shows sign of illness or dies after adoption.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='1) I will not keep the pet tied,outsite in harsh conditions all the time or all by itself for long stretches of time.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='2) Whether I adopt a male or a female puppy/kitten, I will get it neutered/ spayed after it reaches the age of 7 months.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='3) In case the ownership of the dog needs to be changed, the CARETAKERS/ FOSTERS and Team Animals with Humanity will be notified and procedures will be followed.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='4) I am aware that abandoning an adopted dog will attract penalty under Prevention of Cruelty to Animals Act.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='5) I will register the dog with the Municipal Corporation as per the rules.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='6) I have read the relevant sections of the Prevention of Cruelty Act, 1990 (Gol)* (Annex I), and am aware of the provisions of the Act 1960.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='7) I agree that over the next six months, the organizers have the right to inspect the manner in which I am keeping the animal, without prior notice.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text=' If there are any violations under the Prevention of Cruelty Act, 1960 (Gol), I am aware that the organizers may confiscate the animal or take action as per the law.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='').pack()
-Label(Terms_window,text='In case the puppy/ kitten is found abandoned, in a bad condition or dead due to negligence of the owner,\nTeam Animals with Humanity can take a fine of Rs. 10,000/- and proceed with legal action on the adopter.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='In case, I (adopter) return the puppy/kitten, I (adopter) will be liable to pay a amount of Rs. 5000/-\nif returned within 1 week after adoption and Rs. 3000/- thereafter to Team Animals with Humanity.',font=("Arial",10,"bold")).pack()
-Label(Terms_window,text='I enter into this contract of my own free will and understand that this is a binding contract enforceable by civil law.',font=("Arial",10,"bold")).pack()
-
-#Terms_window.mainloop()
-#Terms_window=Tk()
-Label(Terms_window,text='CONSENT BY ADOPTER',font=("Arial", 25)).pack()
+Label(Terms_window,text='CONSENT BY ADOPTER',font=("Arial", 25,"bold")).pack()
 Label(Terms_window,text='1) I am adopting the puppy/kitten at my own risk and my responsibility. I have consulted other members of the family and they have agreed to adopt the pup/kitten.',font=("Arial",10,"bold")).pack()
 Label(Terms_window,text='I will make sure that the adopted pet gets checked thoroughly by the Vet after adoption.',font=("Arial",10,"bold")).pack()
 Label(Terms_window,text='2) I will ensure that the animal adopted by me is kept in clean, well-ventilated premises, properly fed and given regular exercise.',font=("Arial",10,"bold")).pack()
 Label(Terms_window,text='3)In case the animal adopted by me falls ill, I will consult a vet. I will also ensure that the deworming and the vaccination schedule advised by the vet is followed.',font=("Arial",10,"bold")).pack()	
 Label(Terms_window,text='4) I am fully aware that some diseases like gastro-enteritis, rabies, distemper, respiratory diseases, etc. cannot be diagnosed by a vet during the preliminary checkup.',font=("Arial",10,"bold")).pack()
 Label(Terms_window,text='If the animal that I have adopted shows signs of some illness after a few days of adoption, then I will get the pet treated from a vet.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='Terms and Conditions',font=('Arial',25,"bold")).pack()
+#Label(Terms_window,text='1) I shall not hold the organizers of the adoption camp responsible if the animal shows sign of illness or dies after adoption.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='1) 1 will not keep the pet tied or outside in harsh conditions all the time or all by itself for long stretches of time.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='2) Whether I adopt a male or a female puppy/kitten, I will get it neutered/ spayed to ensure good health of the pet.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='3) In case the ownership of the dog needs to be changed, I will inform the CARETAKERS/FOSTERS and Team Animals with Humanity and the procedures will be followed.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='4) I am aware that Abandoning an adopted dog will attract penalty under Prevention of Cruelty to Animals Act, 1960. Team Animals With Humanity can seek legal actions against the Adopter if done so.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='5) I will register the pet I adopted at my will with the Municipal Corporation as per the rules. ',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='6) I\'m aware that the pet adoption is at Zero Rupees (Rs. 0/-) cost with proper counseling & consultation.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='7) I agree that over the lifetime period of the Adopted Pet, Team Animals With Humanity and the Caretaker/Foster have the right to inspect the manner in which I am keeping the animal at home',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='along with other places I take my pet to, digitally or by physical meet ups WITHOUT PRIOR NOTICE',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='I will give Team Animals With Humanity regular updates of the Adopted Pet. If there are any violations under the Prevention of Cruelty Act, 1960,',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='I am aware that Team Animals With Humanity may confiscate the animal or take action as per the law.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='In case the puppy/kitten/pet is found abandoned, in a unhealthy, bad condition or dead due to negligence of the owner,',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='Team Animals with Humanity can take a fine of Rs. 10,000/- and proceed with legal action on the Adopter',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='After signing to the terms, in case, I (adopter) return the Adopted Pet, I (adopter) will be liable to pay an amount up to Rs. 5000/- if returned. ',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='I (adopter) will return the Adopted Pet ONLY to Team Animals with Humanity and won\'t abandon it.',font=("Arial",10,"bold")).pack()
+Label(Terms_window,text='I enter into this contract of my own free will and understand that this is a binding contract enforceable by civil law.',font=("Arial",10,"bold")).pack()
 check=Checkbutton(Terms_window,text='I consent to the above terms',font=("Arial",10,"bold"))
 check.pack()
+Button(Terms_window,text='Translate to hindi',command=translate).pack()
 Button(Terms_window,text='save print and clear',command=Save).pack()
 Terms_window.mainloop()
