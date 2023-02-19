@@ -14,7 +14,7 @@ import docx
 date=datetime.date.today()
 filename=str(date)+'.csv'
 path=os.path.join(os.getcwd(),'data',filename)
-columns=['counselor name','Date','Time','Kind of Animal','Tag number','Sex','Age','Fur Color','Breed','Health Acknowledgement','Caretaker/Foster name','Caretaker Contact no','Caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','Adoptor Contact no','Adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','What are your plans for taking care of your','Have you had a pet before','Your pet will primarly be an','My dog/cat needs to be able to be alone (per day)','When not home']
+columns=['counselor name','Date','Time','Kind of Animal','Tag number','Sex','Age','Fur Color','Breed','Health Acknowledgement','Caretaker/Foster name','Caretaker Contact no','Caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','Adopter Contact no','Adopter whatsapp','Line of work','Email','Local Residence','Permanent Residence','What are your plans for taking care of your','Have you had a pet before','Your pet will primarily be an','My dog/cat needs to be able to be alone (per day)','When not home']
 def Test_file():
     try:
         file=open(path)
@@ -23,7 +23,7 @@ def Test_file():
         try:
             open_file=open(path,'w')
             Writer=writer(open_file)
-            Writer.writerow(['counselor name','Date','Time','Kind of Animal','Tag number','Sex','Age','Color','Breed','Health Acknowledgement','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adoptor Contact no','adoptor whastapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
+            Writer.writerow(['counselor name','Date','Time','Kind of Animal','Tag number','Sex','Age','Color','Breed','Health Acknowledgement','Caretaker/Foster name','caretaker Contact no','caretaker whatsapp','Email','Local Residence','Permanent residence','Adopter\'s name','adopter Contact no','adopter whatsapp','Line of work','Email','Local Residence','Permanent Residence','incase of moving','pet before or currently','Your pet will primarly be an','to be alone (per day)','when not home'])
             open_file.close()
         except FileNotFoundError:
             os.mkdir(os.path.join(os.getcwd(),'data'))
@@ -80,8 +80,8 @@ def Save():
                 elif i== 16:
                     write_text(document,"\n Specifics of the Adopter \n",head='h')
                 write_text(document,f"{columns[i]}:    {data[i]}\n")
-            write_text(document,f"\n\n\nI ({entry14.get()}) has understood and agreee to the tearms and conditions displayed to me on the screen and here by provide my concent by signing below\n\n")
-            write_text(document,"adoptior's signeture:________________________________________________________________\n\n")
+            write_text(document,f"\n\n\nI ({entry14.get()}) has understood and agree to the tearms and conditions displayed to me on the screen and here by provide my concent by signing below\n\n")
+            write_text(document,"adopter's signeture:________________________________________________________________\n\n")
             write_text(document,"caretaker's signeture:_______________________________________________________________\n\n")
             
             document.save(final_path)
