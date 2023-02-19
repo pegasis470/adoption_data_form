@@ -41,10 +41,12 @@ def Check_duplicate(path,file_name):
         return True		
 
 
-def write_text(document,text):
-	para=document.add_paragraph().add_run()
-	para.add_text(text)
-	
+def write_text(document,text,head='t'):
+    para=document.add_paragraph().add_run()
+    if head=='t':
+        para.add_text(text)
+    else:
+        document.add_heading(text)
 
       
 def Save():
@@ -72,11 +74,11 @@ def Save():
             document.add_picture("logo.png")
             for i in range(len(data)):
                 if i == 2:
-                    write_text(document,"\n Description of the Animal \n")
+                    write_text(document,"\n Description of the Animal \n",head='h')
                 elif i == 9:
-                    write_text(document,"\n Specifics of the Caretaker/Foster \n")
-                elif i== 15:
-                    write_text(document,"\n Specifics of the Adopter \n")
+                    write_text(document,"\n Specifics of the Caretaker/Foster \n",head='h')
+                elif i== 16:
+                    write_text(document,"\n Specifics of the Adopter \n",head='h')
                 write_text(document,f"{columns[i]}:    {data[i]}\n")
             write_text(document,f"\n\n\nI ({entry14.get()}) has understood and agreee to the tearms and conditions displayed to me on the screen and here by provide my concent by signing below\n\n")
             write_text(document,"adoptior's signeture:________________________________________________________________\n\n")
@@ -206,9 +208,9 @@ label1.grid(sticky="W",row=0+1,column=1,columnspan=2)
 label2.grid(sticky="e",row=1+1,column=0)
 entry1.grid(sticky="W",row=1+1,column=1)
 label28.grid(sticky="e",row=3,column=0)
-entry22.grid(sticky="W",row=3,column=1)
+entry2.grid(sticky="W",row=3,column=1)
 label3.grid(sticky="e",row=2+1+1,column=0)
-entry2.grid(sticky="W",row=2+1+1,column=1)
+entry22.grid(sticky="W",row=2+1+1,column=1)
 label4.grid(sticky="e",row=2+1+1,column=2)
 entry3.grid(sticky="W",row=2+1+1,column=3)
 label5.grid(sticky="e",row=3+1+1,column=0)
