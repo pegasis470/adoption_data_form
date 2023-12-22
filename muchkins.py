@@ -79,7 +79,7 @@ class Camara:
     def Save_image(self):
         print(self.imageof)
         if self.imageof==0:
-            os.rename(os.path.join('images','Temp_name.png'),os.path.join('images',f'{Breed.get()}.png'))
+            os.rename(os.path.join('images','Temp_name.png'),os.path.join('images',f'{Tag.get()}.png'))
         elif self.imageof==1:
             os.rename(os.path.join('images','Temp_name.png'),os.path.join('images',f'{Caretaker.get()}.png'))
         elif self.imageof==2:
@@ -125,7 +125,7 @@ class BackEnd:
 
 
     def Write_form(self):
-        image_animal=os.path.join('images',f'{Breed.get()}.png')
+        image_animal=os.path.join('images',f'{Tag.get()}.png')
         caretaker_image=os.path.join('images',f'{Caretaker.get()}.png')
         adopter_image=os.path.join('images',f'{Adopter.get()}.png')
         doc = docx.Document()
@@ -147,7 +147,7 @@ class BackEnd:
         dic.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
         dic.style.font.color.rgb = RGBColor(0,0,0)
         animal=doc.add_table(rows=1,cols=2) 
-        animal.cell(0,0).add_paragraph(f"Colour: {Color.get()}        \nGender: {Gender.get()}    Age: 12\nBreed: {Breed.get()}\nPhysically Fitness Status: {Health.get()}\nVaccination Status: {Vaccination.get()}\nSterilisation Status: {Sterilisation.get()}")
+        animal.cell(0,0).add_paragraph(f"Colour: {Color.get()}        Tag:{Tag.get()}\nGender: {Gender.get()}    Age: {Age.get()}\nBreed: {Breed.get()}\nPhysically Fitness Status: {Health.get()}\nVaccination Status: {Vaccination.get()}\nSterilisation Status: {Sterilisation.get()}")
         animal.cell(0,1).add_paragraph().add_run().add_picture(image_animal,width=Inches(2),height=Inches(1.75))
         details=doc.add_heading("DETAILS OF CARETAKER                   DETAILS OF ADOPTER",1)
         details.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -156,10 +156,10 @@ class BackEnd:
         if SameVar.get():
             formated_text=f"Name of Caretaker: {Caretaker.get()}\nContact No.: {CaretakerContact.get()}\nWhatsapp No.: {CaretakerWhatsapp.get()}\nEmail I'd: {Email.get()}\nLocal Residence: {LocalAdd.get()}\nPermanent Residence: {LocalAdd.get()}\nInstagram/Facebook ID: {ID.get()}\nSigneture:_______________"
         else:
-            formated_text=f"Name of Caretaker: {Caretaker.get()}\nContact No.: {CaretakerContact.get()}\nWhatsapp No.: {CaretakerWhatsapp.get()}\nEmail I'd: {Email.get()}\nLocal Residence: {LocalAdd.get()}\nPermanent Residence: {PermanentAdd.get()}\nInstagram/Facebook ID: {ID.get()}\nSigneture:_______________"  
+            formated_text=f"Name of Caretaker: {Caretaker.get()}\nContact No.: {CaretakerContact.get()}\nWhatsapp No.: {CaretakerWhatsapp.get()}\nEmail I'd: {Email.get()}\nLocal Residence: {LocalAdd.get()}\nPermanent Residence: {PermanentAdd.get()}\nInstagram/Facebook ID: {ID.get()}\nSigneture:_______________"  `
         caretaker.cell(0,0).add_paragraph(formated_text)
         if SameVar1.get():
-            formated_text=f"Name of Adopter: {Adopter.get()}\nContact No.: {AdopterContact.get()}\nWhatsapp No.: {AdopterWhatsapp.get()}\nEmail Id: {Email1.get()}\nLocal Residence: {AdopterLocalAdd.get()}\nPermanent Residence: {AdopterLocalAdd.get()}\nInstagram/Facebook ID: {Adoptor_ID.get()}\nSigneture:_______________" 
+            formated_text=f"Name of Adopter: {Adopter.get()}\nContact No.: {AdopterContact.get()}\nWhatsapp No.: {AdopterWhatsapp.get()}\nEmail Id: {Email1.get()}      Government ID:{gov_ID.get()}\nLocal Residence: {AdopterLocalAdd.get()}          ID No.:{ID_num.get()}\nPermanent Residence: {AdopterLocalAdd.get()}\nInstagram/Facebook ID: {Adoptor_ID.get()}\nSigneture:_______________" 
         else:
            formated_text=f"Name of Adopter: {Adopter.get()}\nContact No.: {AdopterContact.get()}\nWhatsapp No.: {AdopterWhatsapp.get()}\nEmail Id: {Email1.get()}\nLocal Residence: {AdopterLocalAdd.get()}\nPermanent Residence: {AdopterPermanentAdd.get()}\nInstagram/Facebook ID: {Adoptor_ID.get()}\nSigneture:_______________" 
         caretaker.cell(0,1).add_paragraph(formated_text)
@@ -184,8 +184,9 @@ class BackEnd:
         doc.add_paragraph("I ______________ acknowledge that abandoning or subjecting my pet to mistreatment may lead to legal consequences under the Prevention of Cruelty to Animals Act of 1960. In case my pet is found in any such situation, Team Animals With Humanity will take a fine upto Rs. 10,000/- depending on the situation and proceed with legal action.",style='List Bullet')
         doc.add_paragraph("I enter into this contract of my own free will and understand that this is a binding contract enforceable by civil law.",style='List Bullet')
         doc.save(self.file_path)
+        doc.save(os.path.join(os.getcwd(),'Print.docx'))
     def Append_data(self):
-        data=[Councler.get(),dt.now().strftime("%d.%m.%y %I:%m %p"),'Tag.get()',Gender.get(),Age.get(),Color.get(),Breed.get(),Health.get(),Vaccination.get(),Sterilisation.get(),Caretaker.get(),CaretakerContact.get(),CaretakerWhatsapp.get(),Email.get(),LocalAdd.get(),PermanentAdd.get(),Adopter.get(),AdopterContact.get(),AdopterWhatsapp.get(),Email1.get(),Adoptor_ID.get(),AdopterLocalAdd.get(),PermanentAdd.get(),Plans.get("1.0","end-1c"),Owned.get(),Alone.get(),NotHome.get()]
+        data=[Councler.get(),dt.now().strftime("%d.%m.%y %I:%m %p"),Tag.get(),Gender.get(),Age.get(),Color.get(),Breed.get(),Health.get(),Vaccination.get(),Sterilisation.get(),Caretaker.get(),CaretakerContact.get(),CaretakerWhatsapp.get(),Email.get(),LocalAdd.get(),PermanentAdd.get(),Adopter.get(),AdopterContact.get(),AdopterWhatsapp.get(),Email1.get(),gov_ID.get(),ID_num,Adoptor_ID.get(),AdopterLocalAdd.get(),PermanentAdd.get(),Plans.get("1.0","end-1c"),Owned.get(),Alone.get(),NotHome.get()]
         try:
                 file=open(self.data_path,'a') 
         except PermissionError:
@@ -201,7 +202,7 @@ class BackEnd:
         Age.delete(0,END)
         Color.delete(0,END)
         Breed.delete(0,END)
-        #Tag.delete(0,END)
+        Tag.delete(0,END)
         Health.delete(0,END)
         Vaccination.delete(0,END)
         Sterilisation.delete(0,END)
@@ -217,6 +218,8 @@ class BackEnd:
         AdopterWhatsapp.delete(0,END)
         Adoptor_ID.delete(0,END)
         Email1.delete(0,END)
+        gov_ID.delete(0,END)
+        ID_num.delkete(0,END)
         AdopterLocalAdd.delete(0,END)
         PermanentAdd.delete(0,END)
         Plans.delete("1.0","end")
@@ -229,6 +232,7 @@ def call_backend():
     back.Write_form()
     back.Append_data()
     back.clear()
+    #os.startfile("Print.docx", "print")
 # This is the front end of the application
 ##function to show the hindi version of T&C
 def translate():
@@ -272,59 +276,59 @@ Councler=Entry(window)
 Councler.grid(sticky="W",row=0,column=1)
 Label(window,text="Description of the Animal:",font=("Arial",15,"bold","underline")).grid(sticky="W",row=1,column=1)
 #sex.grid(sticky="W",row=2,column=1)
-#Label(window,text="Tag Number",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=3,column=0)
-#Tag=Entry(window)
-#Tag.grid(sticky="W",row=3,column=1)
-Label(window,text='Gender',font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=2,column=0)
+Label(window,text="Tag Number",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=2,column=0)
+Tag=Entry(window)
+Tag.grid(sticky="W",row=2,column=1)
+Label(window,text='Gender',font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=3,column=0)
 Gender=Entry(window)
-Gender.grid(sticky="W",row=2,column=1)
-Label(window,text='Age',font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=2,column=2)
+Gender.grid(sticky="W",row=3,column=1)
+Label(window,text='Age',font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=3,column=2)
 Age=Entry(window)
-Age.grid(sticky="W",row=2,column=3)
-Label(window,text='Colour',font=("Arial",15)).grid(sticky="E",row=3,column=0)
+Age.grid(sticky="W",row=3,column=3)
+Label(window,text='Colour',font=("Arial",15)).grid(sticky="E",row=4,column=0)
 Color=Entry(window)
-Color.grid(sticky="W",row=3,column=1)
-Label(window,text='Breed',font=("Arial",15)).grid(sticky="E",row=3,column=2)
+Color.grid(sticky="W",row=4,column=1)
+Label(window,text='Breed',font=("Arial",15)).grid(sticky="E",row=4,column=2)
 Breed=Entry(window)
 #Lable(window,text='Tag Number',font=("Arial",15)).grid(sticky="E",row=3,column=2)
-Breed.grid(sticky="W",row=3,column=3)
-Label(window,text='Physically Fitness Status',font=("Arial",15)).grid(sticky="E",row=4,column=0)
+Breed.grid(sticky="W",row=4,column=3)
+Label(window,text='Physically Fitness Status',font=("Arial",15)).grid(sticky="E",row=5,column=0)
 Health=Entry(window)
-Health.grid(sticky="W",row=4,column=1)
-Label(window,text="Vaccination status",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=4,column=2)
+Health.grid(sticky="W",row=5,column=1)
+Label(window,text="Vaccination status",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=5,column=2)
 Vaccination=Entry(window)
-Vaccination.grid(sticky="E",row=4,column=3)
-Label(window,text="Sterilisation Status",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=5,column=0)
+Vaccination.grid(sticky="E",row=5,column=3)
+Label(window,text="Sterilisation Status",font=("Nimbus Sans Narrow",15)).grid(sticky="E",row=6,column=0)
 Sterilisation=Entry(window)
-Sterilisation.grid(sticky="W",row=5,column=1)
-Button(window,text="Photo Of Animal",command=Camara(0).New_window).grid(row=5,column=2)
-Label(window,text="Specifics of the Caretaker/Foster",font=("Arial",15,"bold","underline")).grid(sticky="W",row=6,column=1)
-Label(window,text='Caretaker/Foster’s name',font=("Arial",15)).grid(sticky="E",row=7,column=0)
+Sterilisation.grid(sticky="W",row=6,column=1)
+Button(window,text="Photo Of Animal",command=Camara(0).New_window).grid(row=6,column=2)
+Label(window,text="Specifics of the Caretaker/Foster",font=("Arial",15,"bold","underline")).grid(sticky="W",row=7,column=1)
+Label(window,text='Caretaker/Foster’s name',font=("Arial",15)).grid(sticky="E",row=8,column=0)
 Caretaker=Entry(window)
-Caretaker.grid(sticky="W",row=7,column=1)
-Label(window,text='Contact no',font=("Arial",15)).grid(sticky="E",row=8,column=0)
+Caretaker.grid(sticky="W",row=8,column=1)
+Label(window,text='Contact no',font=("Arial",15)).grid(sticky="E",row=9,column=0)
 CaretakerContact=Entry(window)
-CaretakerContact.grid(sticky="W",row=8,column=1)
-Label(window,text='Contact no/Whatsapp',font=("Arial",15)).grid(sticky="E",row=8,column=2)
+CaretakerContact.grid(sticky="W",row=9,column=1)
+Label(window,text='Contact no/Whatsapp',font=("Arial",15)).grid(sticky="E",row=9,column=2)
 CaretakerWhatsapp=Entry(window)
-CaretakerWhatsapp.grid(sticky="E",row=8,column=3)
-Label(window,text='Email',font=("Arial",15)).grid(sticky="E",row=9,column=0)
+CaretakerWhatsapp.grid(sticky="E",row=9,column=3)
+Label(window,text='Email',font=("Arial",15)).grid(sticky="E",row=10,column=0)
 Email=Entry(window)
-Email.grid(sticky="W",row=9,column=1)
-Label(window,text='Instagram/Facebook ID',font=("Arial",15)).grid(sticky="E",row=9,column=2)
+Email.grid(sticky="W",row=10,column=1)
+Label(window,text='Instagram/Facebook ID',font=("Arial",15)).grid(sticky="E",row=10,column=2)
 ID=Entry(window)
-ID.grid(sticky="W",row=9,column=3)
-Label(window,text='Local Residence',font=("Arial",15)).grid(sticky="E",row=10,column=0)
+ID.grid(sticky="W",row=10,column=3)
+Label(window,text='Local Residence',font=("Arial",15)).grid(sticky="E",row=11,column=0)
 LocalAdd=Entry(window)
-LocalAdd.grid(sticky="W",row=10,column=1)
-Button(window,text="Photo of Caretaker",command=Camara(1).New_window).grid(row=10,column=2)
+LocalAdd.grid(sticky="W",row=11,column=1)
+Button(window,text="Photo of Caretaker",command=Camara(1).New_window).grid(row=11,column=2)
 SameVar = IntVar()
 Same1=Checkbutton(window,text="same as local",font=("Arial",15),variable=SameVar,onvalue=True,offvalue=False)
 ### handle this in backend call SameVar.get() at time of submitting ##
-Same1.grid(sticky="W",row=11,column=2)
-Label(window,text='Permanent Residence',font=("Arial",15)).grid(sticky="E",row=11,column=0)
+Same1.grid(sticky="W",row=12,column=2)
+Label(window,text='Permanent Residence',font=("Arial",15)).grid(sticky="E",row=12,column=0)
 PermanentAdd=Entry(window)
-PermanentAdd.grid(sticky="W",row=11,column=1)
+PermanentAdd.grid(sticky="W",row=12,column=1)
 Label(window,text="Specifics of the Adopter",font=("Arial",15,"bold","underline")).grid(sticky="W",row=13,column=1)
 Label(window,text="Adopter's Name",font=("Arial",15)).grid(sticky="E",row=14,column=0)
 Adopter=Entry(window)
@@ -342,6 +346,12 @@ Button(window,text="Photo of Adopter",command=Camara(2).New_window).grid(row=16,
 Label(window,text='Email',font=("Arial",15)).grid(sticky="E",row=17,column=0)
 Email1=Entry(window)
 Email1.grid(sticky="W",row=17,column=1)
+Label(window,text="Government ID",font=("Arial",15)).grid(sticky="E",row=17,column=2)
+gov_ID=Entry(window)
+gov_ID.grid(sticky="W",row=17,column=3)
+Label(window,text="ID Number",font=("Arial",15)).grid(sticky="E",row=18,column=2)
+ID_num=Entry(window)
+ID_num.grid(sticky="W",row=18,column=3)
 Label(window,text='Local Address',font=("Arial",15)).grid(sticky="E",row=18,column=0)
 AdopterLocalAdd=Entry(window)
 AdopterLocalAdd.grid(sticky="W",row=18,column=1)
@@ -405,4 +415,3 @@ Terms_window.mainloop()
 if __name__=='__main__':
     ##preform backend prequisites here## 
     window.mainloop()
-
