@@ -372,8 +372,7 @@ NotHome=Entry(window)
 NotHome.grid(sticky="W",row=23,column=1)
 button=Button(window,text="save,print and clear",command=call_backend)
 button.grid(row=24,column=1)
-backend=BackEnd()
-backend.Test_file()
+
 
 ##T&C window
 Terms_window=Toplevel()
@@ -406,5 +405,7 @@ Terms_window.mainloop()
 
 if __name__=='__main__':
     ##preform backend prequisites here## 
+    backend=BackEnd()
+    backend.Test_file()
     window.mainloop()
 
